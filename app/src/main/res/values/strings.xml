@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">RaaProjekat</string>
+    <string name="emailButtonText">E-Mail</string>
+    <string name="confirmEmailText">Confirm E-mail</string>
+    <string name="passwordButtonText">Password</string>
+    <string name="confirmPasswordText">Confirm password</string>
+    <string name="signInButtonText">Sign in</string>
+    <string name="registerQuestionText">Don\'t have an account?</string>
+    <string name="registerLinkText">Sign up here</string>
+    <string name="forgottenPassword">Forgot password?</string>
+    <string name="loginQuestion">Already have an account?</string>
+    <string name="loginLink">Log in here</string>
+    <string name="registerButtonText">Register</string>
+</resources>

@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/marko/AndroidStudioProjects/RaaProjekat/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/marko/AndroidStudioProjects/RaaProjekat/app/src/main/res/layout/fragment_favorites.xml" value="0.2911458333333333" />
+        <entry key="..\:/Users/marko/AndroidStudioProjects/RaaProjekat/app/src/main/res/layout/fragment_home.xml" value="0.2911458333333333" />
         <entry key="..\:/Users/marko/AndroidStudioProjects/RaaProjekat/app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="..\:/Users/marko/AndroidStudioProjects/RaaProjekat/app/src/main/res/layout/fragment_main.xml" value="0.36096014492753625" />
+        <entry key="..\:/Users/marko/AndroidStudioProjects/RaaProjekat/app/src/main/res/layout/fragment_profile.xml" value="0.2911458333333333" />
         <entry key="..\:/Users/marko/AndroidStudioProjects/RaaProjekat/app/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="..\:/Users/marko/AndroidStudioProjects/RaaProjekat/app/src/main/res/menu/bottom_nav.xml" value="0.2828125" />
       </map>

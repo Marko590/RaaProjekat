@@ -34,6 +34,9 @@
             app:popExitAnim="@android:anim/slide_out_right"
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -47,6 +50,10 @@
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.marko590.raaprojekat.fragments.DetailsFragment"
+        android:label="DetailsFragment" />
 
 
 </navigation>

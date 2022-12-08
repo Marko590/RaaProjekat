@@ -1,18 +1,23 @@
 package com.marko590.raaprojekat.fragments
 
-import com.marko590.raaprojekat.databinding.FragmentHomeBinding
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.marko590.raaprojekat.R
-import com.marko590.raaprojekat.databinding.ActivityMainBinding
-import com.marko590.raaprojekat.databinding.FragmentLoginBinding
-import com.marko590.raaprojekat.databinding.FragmentRegisterBinding
+
+import com.marko590.raaprojekat.databinding.FragmentHomeBinding
+import com.marko590.raaprojekat.models.BoredApi
+import com.marko590.raaprojekat.models.RetrofitClient
+import com.marko590.raaprojekat.viewmodel.BoredViewModel
+
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 
 class HomeFragment :Fragment(){
     private var _binding: FragmentHomeBinding? = null
@@ -21,6 +26,9 @@ class HomeFragment :Fragment(){
         super.onCreate(savedInstanceState)
     }
 
+    private val viewModel: BoredViewModel by activityViewModels()
+
+    private var bundle:Bundle=Bundle()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,8 +46,38 @@ class HomeFragment :Fragment(){
 
 
 
+        fragmentTextUpdateObserver()
+        fillBundle()
+        viewModel.getUpdatedText()
+        binding.button2.setOnClickListener{
+                viewModel.getUpdatedText()
+        }
+        binding.button3.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_detailsFragment,bundle)
+        }
     }
 
+    private fun fragmentTextUpdateObserver() {
+        viewModel.uiTextLiveData.observe(viewLifecycleOwner, Observer { updatedActivity ->
+            binding.activity.text = updatedActivity.activity
+            binding.participantNumber.text=updatedActivity.participants.toString()
+            binding.price.text=updatedActivity.price.toString()
+
+        })
+    }
+    private fun fillBundle() {
+
+        viewModel.uiTextLiveData.observe(viewLifecycleOwner, Observer { updatedActivity ->
+            bundle.putString("activity",updatedActivity.activity)
+            bundle.putString("link",updatedActivity.link)
+            bundle.putString("type",updatedActivity.type)
+            bundle.putFloat("accessibility",updatedActivity.accessibility)
+            bundle.putFloat("price",updatedActivity.price)
+            bundle.putInt("key",updatedActivity.key)
+            bundle.putInt("participants",updatedActivity.participants)
+
+        })
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

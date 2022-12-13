@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="150dp"
+        android:layout_width="300dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="75dp"
         android:text="@string/signInButtonText"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldFirstName"
@@ -22,10 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:hint="@string/emailButtonText"
-        app:startIconDrawable="@drawable/ic_baseline_email_24"
+        app:startIconDrawable="@drawable/ic_outline_mail_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appIcon"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -44,7 +48,10 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldFirstName">
+        app:startIconDrawable="@drawable/ic_outline_vpn_key_24"
+        app:layout_constraintTop_toBottomOf="@+id/textFieldFirstName"
+        app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -57,7 +64,7 @@
         android:id="@+id/appIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -69,26 +76,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="100dp"
+
         android:text="@string/registerQuestionText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/registerLink"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.488" />
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
         android:id="@+id/registerLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="80dp"
+
+
+        android:layout_marginEnd="88dp"
         android:text="@string/registerLinkText"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.488" />
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
         android:id="@+id/textView5"

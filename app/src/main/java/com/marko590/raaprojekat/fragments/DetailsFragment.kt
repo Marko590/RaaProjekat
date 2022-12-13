@@ -1,17 +1,21 @@
 package com.marko590.raaprojekat.fragments
 
+import android.R.attr.data
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.marko590.raaprojekat.R
-import com.marko590.raaprojekat.databinding.*
+import com.marko590.raaprojekat.adapter.DessertAdapter
+import com.marko590.raaprojekat.databinding.FragmentDetailsBinding
 import com.marko590.raaprojekat.models.ApiActivity
 
+
 class DetailsFragment :Fragment(){
+    private var dessertAdapter: DessertAdapter? = null
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +40,24 @@ class DetailsFragment :Fragment(){
         var retVal= requireArguments().getString("activity_name")
 
         var passedArguments=unpackBundle()
-        binding.restaurantTitle.text=passedArguments.activity
-        binding.restaurantName.text=passedArguments.activity
-        binding.restaurantAddress.text="Number of participants: "+passedArguments.participants.toString()
-        binding.restaurantInfo.text=passedArguments.type
+
+        requireActivity().setActionBar(binding.toolbar)
+
+        requireActivity().actionBar!!.setDisplayHomeAsUpEnabled(true)
+        requireActivity().actionBar!!.setDisplayShowHomeEnabled(true)
+
+
+        binding.toolbar.title=passedArguments.activity
+        binding.toolbar.setNavigationOnClickListener(){
+            findNavController().navigate(R.id.action_detailsFragment_to_mainFragment)
+        }
+
+        binding.favouriteFab.setOnClickListener(){
+            Toast.makeText(
+                requireContext(), "Added to favourites!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun unpackBundle():ApiActivity{

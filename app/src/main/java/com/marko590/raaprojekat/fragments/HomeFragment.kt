@@ -6,17 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.marko590.raaprojekat.R
-
 import com.marko590.raaprojekat.databinding.FragmentHomeBinding
-import com.marko590.raaprojekat.models.BoredApi
-import com.marko590.raaprojekat.models.RetrofitClient
 import com.marko590.raaprojekat.viewmodel.BoredViewModel
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 class HomeFragment :Fragment(){
@@ -36,8 +30,7 @@ class HomeFragment :Fragment(){
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
 
     }
 
@@ -58,25 +51,25 @@ class HomeFragment :Fragment(){
     }
 
     private fun fragmentTextUpdateObserver() {
-        viewModel.uiTextLiveData.observe(viewLifecycleOwner, Observer { updatedActivity ->
+        viewModel.uiTextLiveData.observe(viewLifecycleOwner) { updatedActivity ->
             binding.activity.text = updatedActivity.activity
-            binding.participantNumber.text=updatedActivity.participants.toString()
-            binding.price.text=updatedActivity.price.toString()
+            binding.participantNumber.text = updatedActivity.participants.toString()
+            binding.price.text = updatedActivity.price.toString()
 
-        })
+        }
     }
     private fun fillBundle() {
 
-        viewModel.uiTextLiveData.observe(viewLifecycleOwner, Observer { updatedActivity ->
-            bundle.putString("activity",updatedActivity.activity)
-            bundle.putString("link",updatedActivity.link)
-            bundle.putString("type",updatedActivity.type)
-            bundle.putFloat("accessibility",updatedActivity.accessibility)
-            bundle.putFloat("price",updatedActivity.price)
-            bundle.putInt("key",updatedActivity.key)
-            bundle.putInt("participants",updatedActivity.participants)
+        viewModel.uiTextLiveData.observe(viewLifecycleOwner) { updatedActivity ->
+            bundle.putString("activity", updatedActivity.activity)
+            bundle.putString("link", updatedActivity.link)
+            bundle.putString("type", updatedActivity.type)
+            bundle.putFloat("accessibility", updatedActivity.accessibility)
+            bundle.putFloat("price", updatedActivity.price)
+            bundle.putInt("key", updatedActivity.key)
+            bundle.putInt("participants", updatedActivity.participants)
 
-        })
+        }
     }
 
     override fun onDestroyView() {

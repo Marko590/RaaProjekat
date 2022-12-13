@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.marko590.raaprojekat.R
-import com.marko590.raaprojekat.databinding.FragmentLoginBinding
+
 import com.marko590.raaprojekat.databinding.FragmentMainBinding
 
 class MainFragment: Fragment() {
@@ -23,8 +23,7 @@ class MainFragment: Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

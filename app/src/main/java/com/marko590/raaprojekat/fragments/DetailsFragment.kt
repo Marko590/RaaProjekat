@@ -13,7 +13,7 @@ import com.marko590.raaprojekat.models.ApiActivity
 
 
 class DetailsFragment :Fragment(){
-    private var dessertAdapter: DessertAdapter? = null
+
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {

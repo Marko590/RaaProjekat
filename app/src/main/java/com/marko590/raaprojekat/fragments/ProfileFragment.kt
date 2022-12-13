@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.marko590.raaprojekat.R
-import com.marko590.raaprojekat.databinding.ActivityMainBinding
-import com.marko590.raaprojekat.databinding.FragmentLoginBinding
+
 import com.marko590.raaprojekat.databinding.FragmentProfileBinding
-import com.marko590.raaprojekat.databinding.FragmentRegisterBinding
+
 
 class ProfileFragment :Fragment(){
     private var _binding: FragmentProfileBinding? = null
@@ -27,8 +26,7 @@ class ProfileFragment :Fragment(){
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
 
     }
 

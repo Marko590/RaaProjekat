@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marko590.raaprojekat.models.BoredApi
 import com.marko590.raaprojekat.models.ApiActivity
-import com.marko590.raaprojekat.models.RetrofitClient
+import com.marko590.raaprojekat.models.BoredRetrofitClient
 import kotlinx.coroutines.launch
 
 
@@ -23,7 +23,7 @@ class BoredViewModel: ViewModel() {
 
     suspend fun fetchActivity():ApiActivity{
 
-        val instance= RetrofitClient.getInstance()
+        val instance= BoredRetrofitClient.getInstance()
         val api=instance.create(BoredApi::class.java)
 
         val response=api.getActivity()

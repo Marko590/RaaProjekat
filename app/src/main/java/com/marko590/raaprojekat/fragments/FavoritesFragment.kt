@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.marko590.raaprojekat.adapter.ArticleAdapter
 import com.marko590.raaprojekat.databinding.FragmentFavoritesBinding
 
 class FavoritesFragment :Fragment(){
@@ -15,7 +18,7 @@ class FavoritesFragment :Fragment(){
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
+    inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -28,6 +31,11 @@ class FavoritesFragment :Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        var adapter=ArticleAdapter()
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.adapter=adapter
+        binding.recyclerView.layoutManager=LinearLayoutManager(requireContext()!!)
 
 
     }

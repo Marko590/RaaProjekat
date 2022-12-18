@@ -5,14 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marko590.raaprojekat.adapter.ArticleAdapter
+import com.marko590.raaprojekat.adapter.SwipeActionLeft
+import com.marko590.raaprojekat.adapter.SwipeActionRight
 import com.marko590.raaprojekat.databinding.FragmentFavoritesBinding
 
 class FavoritesFragment :Fragment(){
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
+    private var content:ArrayList<String> =arrayListOf("Marc","Donald","Bruh","Jessy","Amber","Walter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -32,10 +35,14 @@ class FavoritesFragment :Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
 
-        var adapter=ArticleAdapter()
+        var adapter=ArticleAdapter(content)
+        var itemTouchHelperLeft= ItemTouchHelper(SwipeActionLeft(adapter))
+        var itemTouchHelperRight= ItemTouchHelper(SwipeActionRight(adapter))
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter=adapter
         binding.recyclerView.layoutManager=LinearLayoutManager(requireContext()!!)
+        itemTouchHelperLeft.attachToRecyclerView(binding.recyclerView)
+        itemTouchHelperRight.attachToRecyclerView(binding.recyclerView)
 
 
     }

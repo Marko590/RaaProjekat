@@ -6,14 +6,37 @@
         <item name="colorPrimaryVariant">#393E46</item>
         <item name="colorOnPrimary">#222831</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <!-- Status bar color. -->
 
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">#1F293A</item>
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:statusBarColor">#1F293A</item>
+    </style>
+
+    <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
+    <item name="android:textSize">24sp</item>
+
+    <item name="android:textStyle">bold</item>
+</style>
+
+<style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
+<item name="android:textSize">20sp</item>
+<item name="android:maxLines">2</item>
+<item name="android:textStyle">normal</item>
+</style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#393E46</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+    <style name="ChipCustomStyle" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/text_chip_state_list</item>
     </style>
 </resources>

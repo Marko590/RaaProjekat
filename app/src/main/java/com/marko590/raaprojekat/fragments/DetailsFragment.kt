@@ -50,6 +50,11 @@ class DetailsFragment :Fragment(){
             findNavController().navigate(R.id.action_detailsFragment_to_mainFragment)
         }
 
+       
+
+        binding.collapsingToolbar.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+        binding.collapsingToolbar.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
+
         binding.favouriteFab.setOnClickListener(){
             Toast.makeText(
                 requireContext(), "Added to favourites!",

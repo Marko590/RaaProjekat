@@ -1,10 +1,9 @@
 package com.marko590.raaprojekat.fragments
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -35,12 +34,18 @@ class RegisterFragment :Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = requireActivity().window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+
+            window.statusBarColor=getResources().getColor(R.color.statusBarColor)
+        }
 
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
         binding.loginLink.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
-        binding.loginLink.text=sharedPref!!.getString("markobojkovicmb@gmail.com","")
+
         binding.registerButton.setOnClickListener {
             if(checkEmails(binding.textFieldEmail,binding.textFieldConfirmEmail)){
 
@@ -95,7 +100,7 @@ class RegisterFragment :Fragment(){
         }
     }
     fun checkFieldsEqual(email:TextInputLayout, confirmEmail:TextInputLayout):Boolean{
-        binding.errorText.text="invalid1"
+
         return email.editText!!.text.toString()==confirmEmail.editText!!.text.toString()
     }
 

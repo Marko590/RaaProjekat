@@ -10,5 +10,8 @@
     <color name="colorSecondaryVariant">#FF03DAC5</color>
     <color name="colorOnSecondary">#FF000000</color>
 
-
+    <color name="statusBarColorLogin">#fd8d43</color>
+    <color name="navBarColorLogin">#1F293A</color>
+    <color name="navBarColor">#2b384d</color>
+    <color name="statusBarColor">#1F293A</color>
 </resources>

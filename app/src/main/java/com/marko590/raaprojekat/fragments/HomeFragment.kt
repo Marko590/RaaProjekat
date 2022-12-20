@@ -30,6 +30,7 @@ class HomeFragment :Fragment(){
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        viewModel.getUpdatedText()
         return binding.root
 
     }
@@ -41,7 +42,7 @@ class HomeFragment :Fragment(){
 
         fragmentTextUpdateObserver()
         fillBundle()
-        viewModel.getUpdatedText()
+
         binding.button2.setOnClickListener{
                 viewModel.getUpdatedText()
         }

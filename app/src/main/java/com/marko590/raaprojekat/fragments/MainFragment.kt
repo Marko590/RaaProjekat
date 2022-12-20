@@ -1,9 +1,11 @@
 package com.marko590.raaprojekat.fragments
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.TypedValue
+import android.view.*
+import androidx.annotation.AttrRes
 import androidx.fragment.app.Fragment
 import com.marko590.raaprojekat.R
 
@@ -40,8 +42,24 @@ class MainFragment: Fragment() {
             }
             true
         }
-    }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = requireActivity().window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 
+            window.statusBarColor=getResources().getColor(R.color.statusBarColor)
+            window.navigationBarColor=getResources().getColor(R.color.navBarColor)
+            window.navigationBarDividerColor=getResources().getColor(R.color.navBarColor)
+        }
+
+    }
+    fun Context.getColorFromAttr(
+        @AttrRes attrColor: Int,
+        typedValue: TypedValue = TypedValue(),
+        resolveRefs: Boolean = true
+    ): Int {
+        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+        return typedValue.data
+    }
     private fun replaceFragment(fragment:Fragment){
         val fragmentManager= parentFragmentManager
         val fragmentTransaction=fragmentManager.beginTransaction()

@@ -1,17 +1,20 @@
 package com.marko590.raaprojekat.fragments
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Color.parseColor
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.TypedValue
+import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-
+import androidx.annotation.AttrRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.marko590.raaprojekat.R
 import com.marko590.raaprojekat.databinding.FragmentLoginBinding
+
 
 class LoginFragment :Fragment(){
     private var _binding: FragmentLoginBinding? = null
@@ -52,14 +55,16 @@ class LoginFragment :Fragment(){
                 var shakeAnim= AnimationUtils.loadAnimation(requireContext(),R.anim.shake)
                 binding.textFieldEmail.startAnimation(shakeAnim)
                 binding.emailError.visibility=View.VISIBLE
-                Toast.makeText(
-                    requireContext(), "Invalid E-Mail!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                binding.passwordError.text="Invalid E-Mail/Password combination,try again."
             }
         }
 
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = requireActivity().window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor=getResources().getColor(R.color.statusBarColorLogin)
+            window.navigationBarColor=getResources().getColor(R.color.navBarColorLogin)
+        }
 
         binding.registerLink.setOnClickListener{
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -88,6 +93,14 @@ class LoginFragment :Fragment(){
         else{
             return android.util.Patterns.EMAIL_ADDRESS.matcher(binding.textFieldEmail.editText!!.text).matches()
         }
+    }
+    fun Context.getColorFromAttr(
+        @AttrRes attrColor: Int,
+        typedValue: TypedValue = TypedValue(),
+        resolveRefs: Boolean = true
+    ): Int {
+        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+        return typedValue.data
     }
     override fun onDestroyView() {
         super.onDestroyView()

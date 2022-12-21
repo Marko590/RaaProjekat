@@ -31,27 +31,11 @@ class MainFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         replaceFragment(HomeFragment())
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home->replaceFragment(HomeFragment())
-                R.id.profile->replaceFragment(ProfileFragment())
-                R.id.favorites->replaceFragment(FavoritesFragment())
-                else ->{
-
-                }
-            }
-            true
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val window: Window = requireActivity().window
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-
-            window.statusBarColor=getResources().getColor(R.color.statusBarColor)
-            window.navigationBarColor=getResources().getColor(R.color.navBarColor)
-            window.navigationBarDividerColor=getResources().getColor(R.color.navBarColor)
-        }
-
+        setupStatusBar()
+        setupNavBar()
     }
+
+
     fun Context.getColorFromAttr(
         @AttrRes attrColor: Int,
         typedValue: TypedValue = TypedValue(),
@@ -60,6 +44,29 @@ class MainFragment: Fragment() {
         theme.resolveAttribute(attrColor, typedValue, resolveRefs)
         return typedValue.data
     }
+
+    private fun setupNavBar(){
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.home->replaceFragment(HomeFragment())
+                R.id.profile->replaceFragment(ProfileFragment())
+                R.id.favorites->replaceFragment(FavoritesFragment())
+                else ->{
+                }
+            }
+            true
+        }
+    }
+
+    private fun setupStatusBar(){
+        val window: Window = requireActivity().window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+
+        window.statusBarColor=getResources().getColor(R.color.statusBarColor)
+        window.navigationBarColor=getResources().getColor(R.color.navBarColor)
+        window.navigationBarDividerColor=getResources().getColor(R.color.navBarColor)
+    }
+
     private fun replaceFragment(fragment:Fragment){
         val fragmentManager= parentFragmentManager
         val fragmentTransaction=fragmentManager.beginTransaction()

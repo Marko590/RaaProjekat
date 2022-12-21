@@ -21,6 +21,7 @@
             app:contentScrim="#FD7014">
 
             <ImageView
+                android:id="@+id/mainImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_launcher_background"
@@ -52,15 +53,16 @@
             android:layout_margin="20dp">
 
             <RatingBar
+                android:isIndicator="true"
                 android:id="@+id/rBar"
                 android:layout_width="234dp"
                 android:layout_height="56dp"
                 android:layout_marginStart="25dp"
-                android:numStars="5"
+                android:numStars="10"
                 android:rating="4"
                 android:scaleX=".6"
                 android:scaleY=".6"
-                android:stepSize="0.5"
+                android:stepSize="0.0001"
                 android:theme="@style/RatingBar"
                 app:layout_constraintBottom_toBottomOf="@+id/website"
                 app:layout_constraintStart_toEndOf="@+id/website"

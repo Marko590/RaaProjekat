@@ -3,9 +3,7 @@ package com.marko590.raaprojekat.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marko590.raaprojekat.models.BoredApi
-import com.marko590.raaprojekat.models.ApiActivity
-import com.marko590.raaprojekat.models.BoredRetrofitClient
+import com.marko590.raaprojekat.model.*
 import kotlinx.coroutines.launch
 
 

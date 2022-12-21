@@ -1,17 +1,17 @@
 package com.marko590.raaprojekat.fragments
 
-import android.graphics.Color
-import android.os.Build
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.core.view.marginStart
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.chip.ChipGroup
+import com.bumptech.glide.Glide
 import com.marko590.raaprojekat.R
 import com.marko590.raaprojekat.databinding.FragmentDetailsBinding
-import com.marko590.raaprojekat.models.ApiActivity
+import com.marko590.raaprojekat.model.models.DetailArguments
+import java.util.*
 
 
 class DetailsFragment :Fragment(){
@@ -30,63 +30,79 @@ class DetailsFragment :Fragment(){
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var retVal= requireArguments().getString("activity_name")
 
         var passedArguments=unpackBundle()
+        setupActionBar()
+        setupRating(requireArguments().getDouble("score"))
+        setupTitle(requireArguments().getString("name"))
+        setupFavFab()
+        setupChipGroup()
+        binding.textView.text=passedArguments.snippet
 
-        requireActivity().setActionBar(binding.toolbar)
-
-        requireActivity().actionBar!!.setDisplayHomeAsUpEnabled(true)
-        requireActivity().actionBar!!.setDisplayShowHomeEnabled(true)
-
-
-        binding.toolbar.title=passedArguments.activity
+        Glide.with(this).load(requireArguments().getString("link")).into(binding.mainImage).waitForLayout()
         binding.toolbar.setNavigationOnClickListener(){
             findNavController().navigate(R.id.action_detailsFragment_to_mainFragment)
         }
 
+    }
 
-        binding.textView2.text='('+binding.rBar.rating.toString()+')'
+    private fun unpackBundle(): DetailArguments {
+        var name=requireArguments().getString("name");
+        var snippet=requireArguments().getString("snippet");
+        var imageUrl=requireArguments().getString("imageUrl");
+        var score=requireArguments().getDouble("score");
+        var latitude=requireArguments().getDouble("latitude");
+        var longitude=requireArguments().getDouble("longitude");
+        return DetailArguments(name,snippet,imageUrl,score,latitude,longitude)
+    }
 
-        binding.collapsingToolbar.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
-        binding.collapsingToolbar.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
-
-        binding.favouriteFab.setOnClickListener{
-            Toast.makeText(
-                requireContext(), "Added to favourites!",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
+    private fun setupChipGroup(){
         binding.chipGroup.setOnCheckedChangeListener { chipGroup, position ->
             for (i in 0 until chipGroup.childCount){
                 val chip = chipGroup.getChildAt(i)
                 chip.isClickable = chip.id != chipGroup.checkedChipId
                 chip.setOnClickListener(){
                     binding.textView.text=i.toString()
+                    val uri: String =
+                        java.lang.String.format(Locale.ENGLISH, "geo:%f,%f",requireArguments().getDouble("latitude"),requireArguments().getDouble("longitude"))
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                    requireContext().startActivity(intent)
                 }
             }
-            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
+
+        }
+    }
+    private fun setupFavFab(){
+        binding.favouriteFab.setOnClickListener{
+            Toast.makeText(
+                requireContext(), "Added to favourites!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
-    private fun unpackBundle():ApiActivity{
-        var activity=requireArguments().getString("activity");
-        var link=requireArguments().getString("link");
-        var type=requireArguments().getString("type");
-        var accessibility=requireArguments().getFloat("accessibility");
-        var price=requireArguments().getFloat("price");
-        var key=requireArguments().getInt("key");
-        var participants=requireArguments().getInt("participants")
+    private fun setupTitle(title:String?){
+        binding.toolbar.title=title
+        binding.collapsingToolbar.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
+        binding.collapsingToolbar.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar)
+    }
 
-        return ApiActivity(activity!!,type!!,participants,price,link!!,key,accessibility)
+    private fun setupRating(score:Double?){
+        binding.rBar.rating= score!!.toFloat()
+        binding.textView2.text='('+binding.rBar.rating.toString()+')'
+
+    }
+
+    private fun setupActionBar(){
+        requireActivity().setActionBar(binding.toolbar)
+        requireActivity().actionBar!!.setDisplayHomeAsUpEnabled(true)
+        requireActivity().actionBar!!.setDisplayShowHomeEnabled(true)
     }
     override fun onDestroyView() {
         super.onDestroyView()

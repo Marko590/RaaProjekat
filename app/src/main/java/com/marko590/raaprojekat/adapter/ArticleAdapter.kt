@@ -19,13 +19,13 @@ class ArticleAdapter(var content:ArrayList<String>):
     RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val linearLayout:LinearLayout
+
         val scoreTextView: TextView
-        val firstLetterTextView: TextView
+
         init{
-            linearLayout=view.findViewById(R.id.layout)
-            firstLetterTextView=view.findViewById(R.id.txt_desc)
-            scoreTextView=view.findViewById(R.id.txt_name)
+
+
+            scoreTextView=view.findViewById(R.id.restaurantName)
         }
     }
 
@@ -43,7 +43,7 @@ class ArticleAdapter(var content:ArrayList<String>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val score="Article on position number "+position.toString()
-        holder.firstLetterTextView.text=('A'+position).toString()
+
         holder.scoreTextView.text=content[position]
     }
 

@@ -39,7 +39,7 @@ class SwipeActionRight(var adapter: ArticleAdapter): ItemTouchHelper.SimpleCallb
             return
         }
 
-        vh.linearLayout.setTranslationX(dX)
+
 
         adapter.notifyItemChanged(viewHolder.adapterPosition)
 

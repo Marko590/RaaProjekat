@@ -1,4 +1,4 @@
-package com.marko590.raaprojekat.models
+package com.marko590.raaprojekat.model
 
 data class ApiActivity(
     var activity:String,

@@ -52,26 +52,24 @@ class LoginFragment :Fragment(){
                 }
             }
             else{
-                var shakeAnim= AnimationUtils.loadAnimation(requireContext(),R.anim.shake)
+                val shakeAnim= AnimationUtils.loadAnimation(requireContext(),R.anim.shake)
                 binding.textFieldEmail.startAnimation(shakeAnim)
                 binding.emailError.visibility=View.VISIBLE
                 binding.passwordError.text="Invalid E-Mail/Password combination,try again."
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val window: Window = requireActivity().window
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.statusBarColor=getResources().getColor(R.color.statusBarColorLogin)
-            window.navigationBarColor=getResources().getColor(R.color.navBarColorLogin)
-        }
+        val window: Window = requireActivity().window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor=getResources().getColor(R.color.statusBarColorLogin)
+        window.navigationBarColor=getResources().getColor(R.color.navBarColorLogin)
 
         binding.registerLink.setOnClickListener{
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
     }
-    fun checkLogin():Boolean{
+    private fun checkLogin():Boolean{
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
         val storedPassword=sharedPref!!.getString(binding.textFieldEmail.editText!!.text.toString(),"")
         if(storedPassword==""){
@@ -79,14 +77,14 @@ class LoginFragment :Fragment(){
             binding.passwordError.visibility=View.VISIBLE
             return false
         }
-        else{
-            if(storedPassword==binding.textFieldPassword.editText!!.text.toString()){
+        else {
+            if (storedPassword == binding.textFieldPassword.editText!!.text.toString()) {
                 return true
             }
         }
         return false
     }
-    fun checkEmail():Boolean{
+    private fun checkEmail():Boolean{
         if(binding.textFieldEmail.editText!!.text.isBlank()){
             return false
         }

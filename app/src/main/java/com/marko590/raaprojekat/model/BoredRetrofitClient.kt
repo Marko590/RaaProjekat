@@ -1,4 +1,4 @@
-package com.marko590.raaprojekat.models
+package com.marko590.raaprojekat.model
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

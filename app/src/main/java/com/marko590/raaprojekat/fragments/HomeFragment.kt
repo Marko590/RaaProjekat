@@ -7,10 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.marko590.raaprojekat.R
+import com.marko590.raaprojekat.adapter.ArticleAdapter
+import com.marko590.raaprojekat.adapter.RestaurantsAdapter
+import com.marko590.raaprojekat.adapter.SwipeActionLeft
+import com.marko590.raaprojekat.adapter.SwipeActionRight
 import com.marko590.raaprojekat.databinding.FragmentHomeBinding
+import com.marko590.raaprojekat.model.models.Results
 import com.marko590.raaprojekat.viewmodel.BoredViewModel
-
+import com.marko590.raaprojekat.viewmodel.RestaurantViewModel
 
 
 class HomeFragment :Fragment(){
@@ -20,8 +27,8 @@ class HomeFragment :Fragment(){
         super.onCreate(savedInstanceState)
     }
 
-    private val viewModel: BoredViewModel by activityViewModels()
-
+    private val viewModel: RestaurantViewModel by activityViewModels()
+    var dataset:ArrayList<Results> = arrayListOf()
     private var bundle:Bundle=Bundle()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,47 +37,28 @@ class HomeFragment :Fragment(){
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        viewModel.getUpdatedText()
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-        fragmentTextUpdateObserver()
-        fillBundle()
-
-        binding.button2.setOnClickListener{
-                viewModel.getUpdatedText()
+        binding.button2.setOnClickListener(){
+            viewModel.getUpdatedText()
         }
-        binding.button3.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_detailsFragment,bundle)
-        }
+        setupRecycleView()
     }
 
-    private fun fragmentTextUpdateObserver() {
+
+
+    private fun setupRecycleView(){
+        var adapter = RestaurantsAdapter(dataset)
         viewModel.uiTextLiveData.observe(viewLifecycleOwner) { updatedActivity ->
-            binding.activity.text = updatedActivity.activity
-            binding.participantNumber.text = updatedActivity.participants.toString()
-            binding.price.text = updatedActivity.price.toString()
-
+            adapter.updateUserList(updatedActivity.results)
         }
-    }
-    private fun fillBundle() {
-
-        viewModel.uiTextLiveData.observe(viewLifecycleOwner) { updatedActivity ->
-            bundle.putString("activity", updatedActivity.activity)
-            bundle.putString("link", updatedActivity.link)
-            bundle.putString("type", updatedActivity.type)
-            bundle.putFloat("accessibility", updatedActivity.accessibility)
-            bundle.putFloat("price", updatedActivity.price)
-            bundle.putInt("key", updatedActivity.key)
-            bundle.putInt("participants", updatedActivity.participants)
-
-        }
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext()!!)
     }
 
     override fun onDestroyView() {

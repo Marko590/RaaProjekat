@@ -10,12 +10,11 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:text="@string/logoutButton"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintHorizontal_bias="0.504"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldEmail"
+
+        app:layout_constraintTop_toBottomOf="@+id/textFieldCuisine"
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -24,15 +23,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/firstNameButtonText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appIcon"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent">
 
         <com.google.android.material.textfield.TextInputEditText
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="David"/>
+            tools:text="David"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -40,8 +41,8 @@
         android:id="@+id/textFieldLastName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-
+        android:layout_marginTop="25dp"
+        android:hint="@string/lastNameButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textFieldFirstName"
@@ -49,9 +50,10 @@
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent">
 
         <com.google.android.material.textfield.TextInputEditText
+
             android:layout_width="match_parent"
-            android:text="Guetta"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:text="Guetta" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,7 +62,8 @@
         android:id="@+id/textFieldEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
+        android:hint="@string/emailButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textFieldLastName"
@@ -70,8 +73,27 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="john.johnson@gmail.com"
+            tools:text="john.johnson@gmail.com"
             android:inputType="textEmailAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textFieldCuisine"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:hint="@string/cuisineButtonText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textFieldEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Wine" />
 
     </com.google.android.material.textfield.TextInputLayout>
     <ImageView

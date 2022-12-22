@@ -11,9 +11,14 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.marko590.raaprojekat.R
 import com.marko590.raaprojekat.databinding.FragmentLoginBinding
+import com.marko590.raaprojekat.model.database.entities.UserTable
+import com.marko590.raaprojekat.model.models.Results
+import com.marko590.raaprojekat.viewmodel.LoginViewModel
+import com.marko590.raaprojekat.viewmodel.RestaurantViewModel
 
 
 class LoginFragment :Fragment(){
@@ -23,6 +28,7 @@ class LoginFragment :Fragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+    private val viewModel: LoginViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,50 +46,61 @@ class LoginFragment :Fragment(){
 
 
         binding.button.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
-            if(checkEmail()) {
-
-                if(checkLogin()){
-                    findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+            viewModel.allUsers.observe(viewLifecycleOwner) { updated ->
+                var userInDb=updated.find { it.email == binding.textFieldEmail.editText!!.text.toString() }
+                if (userInDb!= null) {
+                    if(userInDb.password==binding.textFieldPassword.editText!!.text.toString()) {
+                        setCurrentUser(userInDb.email,userInDb.firstname,userInDb.lastname,userInDb.preferredCuisine)
+                        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                    }
+                    else {
+                        shakeFields()
+                        showError(getString(R.string.errorCombination))
+                    }
                 }
-                else{
-                    binding.passwordError.text="Invalid E-Mail/Password combination,try again."
-                    binding.passwordError.visibility=View.VISIBLE
+                else {
+                    shakeFields()
+                    showError(getString(R.string.errorCombination))
                 }
-            }
-            else{
-                val shakeAnim= AnimationUtils.loadAnimation(requireContext(),R.anim.shake)
-                binding.textFieldEmail.startAnimation(shakeAnim)
-                binding.emailError.visibility=View.VISIBLE
-                binding.passwordError.text="Invalid E-Mail/Password combination,try again."
             }
         }
-
-        val window: Window = requireActivity().window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor=getResources().getColor(R.color.statusBarColorLogin)
-        window.navigationBarColor=getResources().getColor(R.color.navBarColorLogin)
 
         binding.registerLink.setOnClickListener{
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+        setupBars()
+
 
     }
-    private fun checkLogin():Boolean{
+
+    private fun setCurrentUser(email:String,firstName:String,lastName:String,cuisine:String){
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        val storedPassword=sharedPref!!.getString(binding.textFieldEmail.editText!!.text.toString(),"")
-        if(storedPassword==""){
-            binding.passwordError.text="Invalid E-Mail/Password combination,try again."
-            binding.passwordError.visibility=View.VISIBLE
-            return false
+        with (sharedPref!!.edit()) {
+            putString(getString(R.string.emailKey), email)
+            putString(getString(R.string.firstNameKey), firstName)
+            putString(getString(R.string.lastNameKey), lastName)
+            putString(getString(R.string.preferredCuisineKey), cuisine)
+            apply()
         }
-        else {
-            if (storedPassword == binding.textFieldPassword.editText!!.text.toString()) {
-                return true
-            }
-        }
-        return false
     }
+    private fun shakeFields(){
+        var shakeAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+        binding.textFieldEmail.startAnimation(shakeAnim)
+        binding.textFieldPassword.startAnimation(shakeAnim)
+    }
+
+    private fun setupBars(){
+        val window: Window = requireActivity().window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor= resources.getColor(R.color.statusBarColorLogin)
+        window.navigationBarColor= resources.getColor(R.color.navBarColorLogin)
+    }
+
+    private fun showError(errorText:String){
+        binding.passwordError.text = errorText
+        binding.passwordError.visibility = View.VISIBLE
+    }
+
     private fun checkEmail():Boolean{
         if(binding.textFieldEmail.editText!!.text.isBlank()){
             return false
@@ -92,6 +109,7 @@ class LoginFragment :Fragment(){
             return android.util.Patterns.EMAIL_ADDRESS.matcher(binding.textFieldEmail.editText!!.text).matches()
         }
     }
+
     fun Context.getColorFromAttr(
         @AttrRes attrColor: Int,
         typedValue: TypedValue = TypedValue(),

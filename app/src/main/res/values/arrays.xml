@@ -29,19 +29,15 @@
         <item>Using Design Support Library\'s BottomNavigationView</item>
     </string-array>
 
-    <string-array name="dessert_names">
-        <item>Cupcake</item>
-        <item>Donut</item>
-        <item>Eclair</item>
-        <item>Froyo</item>
-        <item>Gingerbread</item>
-        <item>Honeycomb</item>
-        <item>Ice-cream Sandwich</item>
-        <item>Jelly Bean</item>
-        <item>Kitkat</item>
-        <item>Lollipop</item>
-        <item>Marshmallow</item>
-        <item>Nougat</item>
+    <string-array name="cuisines">
+        <item>cuisine-Wine</item>
+        <item>cuisine-Italian</item>
+        <item>cuisine-Pizza</item>
+        <item>cuisine-Dessert</item>
+        <item>cuisine-Steak</item>
+        <item>cuisine-Japanese</item>
+        <item>cuisine-Indian</item>
+        <item>cuisine-Thai</item>
     </string-array>
 
     <string-array name="dessert_descriptions">

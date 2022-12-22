@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">RaaProjekat</string>
+    <string name="firstNameButtonText">First name</string>
+    <string name="lastNameButtonText">Last name</string>
     <string name="emailButtonText">E-Mail</string>
     <string name="confirmEmailText">Confirm E-mail</string>
     <string name="passwordButtonText">Password</string>
@@ -14,9 +16,19 @@
     <string name="logoutButton">Logout</string>
     <string name="emailError">Wrong E-Mail</string>
     <string name="passwordError">Wrong password</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="summaryDetails">Summary</string>
     <string name="menuDetails">Menu</string>
+    <string name="errorTextPassword">Passwords don\'t match</string>
+    <string name="errorTextEmail">Invalid E-Mail format</string>
+    <string name="errorTextNames">Name fields are empty</string>
+    <string name="errorCombination">Invalid E-Mail/Password combination,try again.</string>
+    <string name="choose_cuisine">Choose cuisine</string>
+    <string name="firstNameKey">firstNameField</string>
+    <string name="lastNameKey">lastNameField</string>
+    <string name="preferredCuisineKey">cuisineField</string>
+    <string name="errorTextCuisine">Please choose a preferred cuisine</string>
+    <string name="cuisineButtonText">Favorite cuisine</string>
 
 </resources>

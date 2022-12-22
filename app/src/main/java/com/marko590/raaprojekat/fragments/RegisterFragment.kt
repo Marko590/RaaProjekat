@@ -1,20 +1,23 @@
 package com.marko590.raaprojekat.fragments
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.marko590.raaprojekat.R
 import com.marko590.raaprojekat.databinding.FragmentRegisterBinding
+import com.marko590.raaprojekat.model.database.entities.UserTable
+import com.marko590.raaprojekat.viewmodel.LoginViewModel
 
 class RegisterFragment :Fragment(){
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-
+    private val viewModel: LoginViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -25,70 +28,113 @@ class RegisterFragment :Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        setupBars()
 
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val window: Window = requireActivity().window
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        val items = resources.getStringArray(R.array.cuisines)
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+        binding.autoCompleteText.setAdapter(adapter)
 
-            window.statusBarColor=getResources().getColor(R.color.statusBarColor)
-        }
-
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
         binding.loginLink.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
         binding.registerButton.setOnClickListener {
-            if(checkEmails(binding.textFieldEmail,binding.textFieldConfirmEmail)){
-
-                if(checkPasswords(binding.textFieldPassword,binding.textFieldConfirmPassword)) {
-                    var storedPassword =
-                        sharedPref?.getString(binding.textFieldEmail.editText!!.text.toString(), "")
-
-                    if (storedPassword == "") {
-                        with(sharedPref!!.edit()) {
-                            putString(
-                                binding.textFieldEmail.editText!!.text.toString(),
-                                binding.textFieldPassword.editText!!.text.toString()
-                            )
-                            apply()
-                            findNavController().navigate(R.id.action_registerFragment_to_mainFragment)
-                        }
-
-                    } else {
-                        binding.errorText.text = "User already registered."
-                        binding.errorText.visibility=View.VISIBLE
-                    }
-                }
-                else{
-                    var shakeAnim= AnimationUtils.loadAnimation(requireContext(),R.anim.shake)
-                    binding.textFieldPassword.startAnimation(shakeAnim)
-                    binding.textFieldConfirmPassword.startAnimation(shakeAnim)
-                    binding.errorText.visibility=View.VISIBLE
-                }
-            }
-            else{
-                var shakeAnim= AnimationUtils.loadAnimation(requireContext(),R.anim.shake)
-                binding.textFieldEmail.startAnimation(shakeAnim)
-                binding.textFieldConfirmEmail.startAnimation(shakeAnim)
-                binding.errorText.text="invalid email"
-                binding.errorText.visibility=View.VISIBLE
-            }
-
+            evaluateFields()
         }
     }
 
 
+    private fun evaluateFields(){
+        var shakeAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+        if(checkNames(binding.textFieldName1,binding.textFieldName2)) {
+            if (checkEmails(binding.textFieldEmail, binding.textFieldConfirmEmail)) {
+
+                if (checkPasswords(binding.textFieldPassword,binding.textFieldConfirmPassword)) {
+
+                    viewModel.allUsers.observe(viewLifecycleOwner) { updated ->
+                        var userInDb =
+                            updated.find { it.email == binding.textFieldEmail.editText!!.text.toString() }
+                        if(binding.cuisinePicker.editText!!.text.isBlank()){
+                            showError(getString(R.string.errorTextCuisine))
+                            binding.cuisinePicker.startAnimation(shakeAnim)
+                        }
+                        else{
+                            if (userInDb != null) {
+                                showError("User already in database")
+                                binding.textFieldEmail.startAnimation(shakeAnim)
+                            } else {
+                                insertUser()
+                                setCurrentUser()
+                                findNavController().navigate(R.id.action_registerFragment_to_mainFragment)
+                            }
+                        }
+                    }
+                } else {
+                    showError(getString(R.string.errorTextPassword))
+                    binding.textFieldPassword.startAnimation(shakeAnim)
+                    binding.textFieldConfirmPassword.startAnimation(shakeAnim)
+
+                }
+            } else {
+
+                binding.textFieldEmail.startAnimation(shakeAnim)
+                binding.textFieldConfirmEmail.startAnimation(shakeAnim)
+                showError(getString(R.string.errorTextEmail))
+            }
+        }
+        else{
+            binding.textFieldName1.startAnimation(shakeAnim)
+            binding.textFieldName1.startAnimation(shakeAnim)
+            showError(getString(R.string.errorTextNames))
+        }
+    }
+
+
+    private fun setCurrentUser(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        with (sharedPref!!.edit()) {
+            putString(getString(R.string.emailKey),binding.textFieldEmail.editText!!.text.toString())
+            putString(getString(R.string.firstNameKey),binding.textFieldName1.editText!!.text.toString())
+            putString(getString(R.string.lastNameKey),binding.textFieldName2.editText!!.text.toString())
+            putString(getString(R.string.preferredCuisineKey), binding.cuisinePicker.editText!!.text.toString())
+            apply()
+        }
+    }
+
+    fun setupBars(){
+        val window: Window = requireActivity().window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor= resources.getColor(R.color.statusBarColor)
+    }
+    fun showError(errorText:String){
+        binding.errorText.text=errorText
+        binding.errorText.visibility = View.VISIBLE
+    }
+
+    fun insertUser(){
+
+        var firstName=binding.textFieldName1.editText!!.text.toString()
+        var lastName=binding.textFieldName2.editText!!.text.toString()
+        var emailName=binding.textFieldEmail.editText!!.text.toString()
+        var password=binding.textFieldPassword.editText!!.text.toString()
+        var preferredCuisine=binding.cuisinePicker.editText!!.text.toString()
+
+        viewModel.addUser(UserTable(firstName,lastName, emailName,password, preferredCuisine))
+    }
+
     fun checkEmails(email:TextInputLayout,confirmEmail:TextInputLayout):Boolean{
         return checkEmailFormat(email) and checkFieldsEqual(email,confirmEmail)
+    }
+
+    fun checkNames(firstName: TextInputLayout,secondName:TextInputLayout):Boolean{
+        return !(firstName.editText!!.text.isBlank() or secondName.editText!!.text.isBlank())
     }
 
     fun checkEmailFormat(email: TextInputLayout):Boolean{

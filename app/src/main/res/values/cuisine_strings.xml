@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="option1">cuisine-Wine</string>
+    <string name="option2">cuisine-Italian</string>
+    <string name="option3">cuisine-Pizza</string>
+    <string name="option4">cuisine-Dessert</string>
+    <string name="option5">cuisine-Steak</string>
+    <string name="option6">cuisine-Japanese</string>
+    <string name="option7">cuisine-Indian</string>
+    <string name="option8">cuisine-Thai</string>
+
+</resources>

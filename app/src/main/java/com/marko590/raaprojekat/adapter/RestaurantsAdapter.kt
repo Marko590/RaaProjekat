@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.marko590.raaprojekat.R
 import com.marko590.raaprojekat.model.models.Results
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class RestaurantsAdapter(var dataset:ArrayList<Results>):
 
@@ -23,8 +26,12 @@ class RestaurantsAdapter(var dataset:ArrayList<Results>):
 
         val restaurantName: TextView
         val restaurantRating:TextView
+        val location:TextView
         val imageView: ImageView
+        val card:CardView
         init{
+            location=view.findViewById(R.id.location)
+            card=view.findViewById(R.id.cardContainer)
             imageView=view.findViewById(R.id.restaurantImage)
             restaurantRating=view.findViewById(R.id.restaurantRating)
             restaurantName=view.findViewById(R.id.restaurantName)
@@ -42,15 +49,20 @@ class RestaurantsAdapter(var dataset:ArrayList<Results>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+
+        val df = DecimalFormat("#.##")
+        df.roundingMode=RoundingMode.DOWN
+        val roundoff = df.format(dataset[position].score!!)
+        holder.location.text=dataset[position].locationId
         holder.restaurantName.text=dataset[position].name
-        holder.restaurantRating.text=dataset[position].score!!.toFloat().toString()
+        holder.restaurantRating.text=roundoff.toString()
         Glide.with(holder.imageView.context)
             .load(dataset[position].images[0].sizes!!.original!!.url)
-
             .skipMemoryCache(true)//for caching the image url in case phone is offline
             .into(holder.imageView)
+
         var navController: NavController? = null
-        holder.restaurantName.setOnClickListener {
+        holder.card.setOnClickListener {
             bundle.putString("name",dataset[position].name)
             bundle.putString("snippet",dataset[position].snippet)
             bundle.putString("link", dataset[position].images[0].sizes!!.original!!.url)

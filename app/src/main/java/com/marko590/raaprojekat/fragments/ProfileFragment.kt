@@ -1,5 +1,6 @@
 package com.marko590.raaprojekat.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,10 +37,18 @@ class ProfileFragment :Fragment(){
         binding.logoutButton.setOnClickListener{
             findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
         }
+        fillFields()
+
 
     }
 
-
+    private fun fillFields(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        binding.textFieldFirstName.editText!!.setText(sharedPref!!.getString(getString(R.string.firstNameKey), ""))
+        binding.textFieldLastName.editText!!.setText(sharedPref.getString(getString(R.string.lastNameKey), ""))
+        binding.textFieldEmail.editText!!.setText(sharedPref.getString(getString(R.string.emailKey), ""))
+        binding.textFieldCuisine.editText!!.setText(sharedPref.getString(getString(R.string.preferredCuisineKey), ""))
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

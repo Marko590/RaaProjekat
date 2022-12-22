@@ -15,7 +15,7 @@
         <item name="android:navigationBarColor">#1F293A</item>
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:statusBarColor">#1F293A</item>
-
+        <item name="android:textViewStyle">@style/AlataTextViewStyle</item>
 
     </style>
 
@@ -24,6 +24,11 @@
 
     <item name="android:textStyle">bold</item>
 </style>
+
+
+    <style name="AlataTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/alata</item>
+    </style>
 
 <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
 <item name="android:textSize">20sp</item>

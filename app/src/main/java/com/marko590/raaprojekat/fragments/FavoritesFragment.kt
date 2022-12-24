@@ -19,10 +19,7 @@ class FavoritesFragment :Fragment(){
     private val binding get() = _binding!!
     private val viewModel: FavoritesViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-    var dataset:ArrayList<Results> = arrayListOf()
+    private var dataset:ArrayList<Results> = arrayListOf()
     override fun onCreateView(
     inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,13 +41,13 @@ class FavoritesFragment :Fragment(){
     }
 
     private fun setupRecycleView(){
-        var adapter = FavoritesAdapter(dataset)
+        val adapter = FavoritesAdapter(dataset)
         viewModel.uiTextLiveData.observe(viewLifecycleOwner) { updatedActivity ->
             adapter.updateUserList(updatedActivity.results)
         }
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext()!!)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
     override fun onDestroyView() {
         super.onDestroyView()

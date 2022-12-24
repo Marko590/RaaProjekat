@@ -1,6 +1,7 @@
 package com.marko590.raaprojekat.adapter
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,7 @@ import com.marko590.raaprojekat.model.models.Results
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-class FavoritesAdapter(var dataset:ArrayList<Results>):
+class FavoritesAdapter(private var dataset:ArrayList<Results>):
 
     RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
     private var bundle: Bundle =Bundle()
@@ -37,13 +38,13 @@ class FavoritesAdapter(var dataset:ArrayList<Results>):
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view=LayoutInflater.from(parent.context).inflate(R.layout.item_dessert,parent,false)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return dataset.size;
+        return dataset.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -63,7 +64,7 @@ class FavoritesAdapter(var dataset:ArrayList<Results>):
         else{
             holder.imageView.visibility=View.GONE
         }
-        var navController: NavController? = null
+        var navController: NavController?
         holder.card.setOnClickListener {
             bundle.putString("name",dataset[position].name)
             bundle.putString("snippet",dataset[position].snippet)
@@ -84,6 +85,7 @@ class FavoritesAdapter(var dataset:ArrayList<Results>):
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateUserList(datasetNew: ArrayList<Results>) {
         dataset.clear()
         dataset = datasetNew

@@ -20,7 +20,7 @@ class FavoritesViewModel: ViewModel() {
         }
     }
 
-    suspend fun fetchFavorites(location_id:String,cuisine:String): RestaurantsResponse {
+    private suspend fun fetchFavorites(location_id:String, cuisine:String): RestaurantsResponse {
 
         val instance= RestaurantRetrofitClient.getInstance()
         val api=instance.create(RestaurantApi::class.java)

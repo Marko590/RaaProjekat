@@ -1,6 +1,7 @@
 package com.marko590.raaprojekat.adapter
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,7 @@ import com.marko590.raaprojekat.model.models.Results
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-class RestaurantsAdapter(var dataset:ArrayList<Results>):
+class RestaurantsAdapter(private var dataset:ArrayList<Results>):
 
     RecyclerView.Adapter<RestaurantsAdapter.ViewHolder>() {
     private var bundle: Bundle =Bundle()
@@ -37,13 +38,13 @@ class RestaurantsAdapter(var dataset:ArrayList<Results>):
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view=LayoutInflater.from(parent.context).inflate(R.layout.item_dessert,parent,false)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return dataset.size;
+        return dataset.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -60,7 +61,7 @@ class RestaurantsAdapter(var dataset:ArrayList<Results>):
             .skipMemoryCache(true)//for caching the image url in case phone is offline
             .into(holder.imageView)
 
-        var navController: NavController? = null
+        var navController: NavController?
         holder.card.setOnClickListener {
             bundle.putString("name",dataset[position].name)
             bundle.putString("snippet",dataset[position].snippet)
@@ -75,6 +76,7 @@ class RestaurantsAdapter(var dataset:ArrayList<Results>):
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateUserList(datasetNew: ArrayList<Results>) {
         dataset.clear()
         dataset = datasetNew

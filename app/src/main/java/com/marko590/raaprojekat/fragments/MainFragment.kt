@@ -1,11 +1,8 @@
 package com.marko590.raaprojekat.fragments
 
-import android.content.Context
-import android.os.Build
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.*
-import androidx.annotation.AttrRes
 import androidx.fragment.app.Fragment
 import com.marko590.raaprojekat.R
 
@@ -36,15 +33,6 @@ class MainFragment: Fragment() {
     }
 
 
-    fun Context.getColorFromAttr(
-        @AttrRes attrColor: Int,
-        typedValue: TypedValue = TypedValue(),
-        resolveRefs: Boolean = true
-    ): Int {
-        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
-        return typedValue.data
-    }
-
     private fun setupNavBar(){
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
@@ -67,6 +55,7 @@ class MainFragment: Fragment() {
         window.navigationBarDividerColor=getResources().getColor(R.color.navBarColor)
     }
 
+    @SuppressLint("PrivateResource")
     private fun replaceFragment(fragment:Fragment){
         val fragmentManager= parentFragmentManager
         val fragmentTransaction=fragmentManager.beginTransaction()

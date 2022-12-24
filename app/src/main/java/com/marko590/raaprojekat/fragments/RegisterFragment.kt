@@ -52,14 +52,14 @@ class RegisterFragment :Fragment(){
 
 
     private fun evaluateFields(){
-        var shakeAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+        val shakeAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
         if(checkNames(binding.textFieldName1,binding.textFieldName2)) {
             if (checkEmails(binding.textFieldEmail, binding.textFieldConfirmEmail)) {
 
                 if (checkPasswords(binding.textFieldPassword,binding.textFieldConfirmPassword)) {
 
                     viewModel.allUsers.observe(viewLifecycleOwner) { updated ->
-                        var userInDb =
+                        val userInDb =
                             updated.find { it.email == binding.textFieldEmail.editText!!.text.toString() }
                         if(binding.cuisinePicker.editText!!.text.isBlank()){
                             showError(getString(R.string.errorTextCuisine))
@@ -108,61 +108,58 @@ class RegisterFragment :Fragment(){
         }
     }
 
-    fun setupBars(){
+    private fun setupBars(){
         val window: Window = requireActivity().window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor= resources.getColor(R.color.statusBarColor)
     }
-    fun showError(errorText:String){
+    private fun showError(errorText:String){
         binding.errorText.text=errorText
         binding.errorText.visibility = View.VISIBLE
     }
 
-    fun insertUser(){
+    private fun insertUser(){
 
-        var firstName=binding.textFieldName1.editText!!.text.toString()
-        var lastName=binding.textFieldName2.editText!!.text.toString()
-        var emailName=binding.textFieldEmail.editText!!.text.toString()
-        var password=binding.textFieldPassword.editText!!.text.toString()
-        var preferredCuisine=binding.cuisinePicker.editText!!.text.toString()
+        val firstName=binding.textFieldName1.editText!!.text.toString()
+        val lastName=binding.textFieldName2.editText!!.text.toString()
+        val emailName=binding.textFieldEmail.editText!!.text.toString()
+        val password=binding.textFieldPassword.editText!!.text.toString()
+        val preferredCuisine=binding.cuisinePicker.editText!!.text.toString()
 
         viewModel.addUser(UserTable(firstName,lastName, emailName,password, preferredCuisine))
     }
 
-    fun checkEmails(email:TextInputLayout,confirmEmail:TextInputLayout):Boolean{
+    private fun checkEmails(email:TextInputLayout, confirmEmail:TextInputLayout):Boolean{
         return checkEmailFormat(email) and checkFieldsEqual(email,confirmEmail)
     }
 
-    fun checkNames(firstName: TextInputLayout,secondName:TextInputLayout):Boolean{
+    private fun checkNames(firstName: TextInputLayout, secondName:TextInputLayout):Boolean{
         return !(firstName.editText!!.text.isBlank() or secondName.editText!!.text.isBlank())
     }
 
-    fun checkEmailFormat(email: TextInputLayout):Boolean{
-        if(email.editText!!.text.isBlank()){
-            return false
-        }
-        else{
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(email.editText!!.text).matches()
+    private fun checkEmailFormat(email: TextInputLayout):Boolean{
+        return if(email.editText!!.text.isBlank()){
+            false
+        } else{
+            android.util.Patterns.EMAIL_ADDRESS.matcher(email.editText!!.text).matches()
         }
     }
-    fun checkFieldsEqual(email:TextInputLayout, confirmEmail:TextInputLayout):Boolean{
+    private fun checkFieldsEqual(email:TextInputLayout, confirmEmail:TextInputLayout):Boolean{
 
         return email.editText!!.text.toString()==confirmEmail.editText!!.text.toString()
     }
 
-    fun checkPasswords(password:TextInputLayout,passwordConfirm:TextInputLayout):Boolean{
-        if(password.editText!!.text.toString()==passwordConfirm.editText!!.text.toString()){
-            if(!password.editText!!.text.toString().isBlank()) {
-                return true
-            }
-            else{
+    private fun checkPasswords(password:TextInputLayout, passwordConfirm:TextInputLayout):Boolean{
+        return if(password.editText!!.text.toString()==passwordConfirm.editText!!.text.toString()){
+            if(password.editText!!.text.toString().isNotBlank()) {
+                true
+            } else{
                 binding.errorText.text="Password is blank"
-                return false
+                false
             }
-        }
-        else{
+        } else{
             binding.errorText.text="Passwords don't match."
-            return false
+            false
         }
     }
     override fun onDestroyView() {

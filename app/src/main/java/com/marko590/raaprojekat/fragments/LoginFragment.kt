@@ -1,30 +1,21 @@
 package com.marko590.raaprojekat.fragments
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.Color.parseColor
-import android.os.Build
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.*
 import android.view.animation.AnimationUtils
-import android.widget.Toast
-import androidx.annotation.AttrRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.marko590.raaprojekat.R
 import com.marko590.raaprojekat.databinding.FragmentLoginBinding
-import com.marko590.raaprojekat.model.database.entities.UserTable
-import com.marko590.raaprojekat.model.models.Results
 import com.marko590.raaprojekat.viewmodel.LoginViewModel
-import com.marko590.raaprojekat.viewmodel.RestaurantViewModel
 
 
 class LoginFragment :Fragment(){
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -47,7 +38,7 @@ class LoginFragment :Fragment(){
 
         binding.button.setOnClickListener {
             viewModel.allUsers.observe(viewLifecycleOwner) { updated ->
-                var userInDb=updated.find { it.email == binding.textFieldEmail.editText!!.text.toString() }
+                val userInDb=updated.find { it.email == binding.textFieldEmail.editText!!.text.toString() }
                 if (userInDb!= null) {
                     if(userInDb.password==binding.textFieldPassword.editText!!.text.toString()) {
                         setCurrentUser(userInDb.email,userInDb.firstname,userInDb.lastname,userInDb.preferredCuisine)
@@ -84,7 +75,7 @@ class LoginFragment :Fragment(){
         }
     }
     private fun shakeFields(){
-        var shakeAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+        val shakeAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
         binding.textFieldEmail.startAnimation(shakeAnim)
         binding.textFieldPassword.startAnimation(shakeAnim)
     }
@@ -101,23 +92,6 @@ class LoginFragment :Fragment(){
         binding.passwordError.visibility = View.VISIBLE
     }
 
-    private fun checkEmail():Boolean{
-        if(binding.textFieldEmail.editText!!.text.isBlank()){
-            return false
-        }
-        else{
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(binding.textFieldEmail.editText!!.text).matches()
-        }
-    }
-
-    fun Context.getColorFromAttr(
-        @AttrRes attrColor: Int,
-        typedValue: TypedValue = TypedValue(),
-        resolveRefs: Boolean = true
-    ): Int {
-        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
-        return typedValue.data
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

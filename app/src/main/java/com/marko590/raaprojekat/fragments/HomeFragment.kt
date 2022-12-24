@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.marko590.raaprojekat.adapter.FavoritesAdapter
 import com.marko590.raaprojekat.adapter.RestaurantsAdapter
 import com.marko590.raaprojekat.databinding.FragmentHomeBinding
 import com.marko590.raaprojekat.model.models.Results
@@ -22,8 +21,7 @@ class HomeFragment :Fragment(){
     }
 
     private val viewModel: RestaurantViewModel by activityViewModels()
-    var dataset:ArrayList<Results> = arrayListOf()
-    private var bundle:Bundle=Bundle()
+    private var dataset:ArrayList<Results> = arrayListOf()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,7 +35,7 @@ class HomeFragment :Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.button2.setOnClickListener(){
+        binding.button2.setOnClickListener {
             viewModel.getUpdatedText()
         }
         setupRecycleView()
@@ -46,13 +44,13 @@ class HomeFragment :Fragment(){
 
 
     private fun setupRecycleView(){
-        var adapter = RestaurantsAdapter(dataset)
+        val adapter = RestaurantsAdapter(dataset)
         viewModel.uiTextLiveData.observe(viewLifecycleOwner) { updatedActivity ->
             adapter.updateUserList(updatedActivity.results)
         }
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext()!!)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun onDestroyView() {

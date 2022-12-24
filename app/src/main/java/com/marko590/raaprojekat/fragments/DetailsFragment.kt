@@ -65,7 +65,7 @@ class DetailsFragment :Fragment(){
     }
 
     private fun setupChipGroup(lat:Double,lng:Double,name:String){
-        binding.chipGroup.setOnCheckedChangeListener { chipGroup, _ ->
+        binding.chipGroup.setOnCheckedStateChangeListener{ chipGroup, _ ->
             for (i in 0 until chipGroup.childCount){
                 val chip = chipGroup.getChildAt(i)
                 chip.isClickable = chip.id != chipGroup.checkedChipId

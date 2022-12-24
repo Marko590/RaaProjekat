@@ -26,12 +26,12 @@ class ArticleAdapter(var content:ArrayList<String>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val score= "Article on position number $position"
+
         holder.scoreTextView.text=content[position]
     }
 
     override fun getItemCount(): Int {
-        return content.size;
+        return content.size
     }
 
 }

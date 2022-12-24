@@ -3,7 +3,9 @@ package com.marko590.raaprojekat.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -11,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.marko590.raaprojekat.R
 import com.marko590.raaprojekat.databinding.FragmentDetailsBinding
 import com.marko590.raaprojekat.model.models.DetailArguments
-import java.util.*
 
 
 class DetailsFragment :Fragment(){
@@ -27,7 +28,7 @@ class DetailsFragment :Fragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
@@ -37,41 +38,41 @@ class DetailsFragment :Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var passedArguments=unpackBundle()
+        val passedArguments=unpackBundle()
         setupActionBar()
         setupRating(requireArguments().getDouble("score"))
         setupTitle(requireArguments().getString("name"))
         setupFavFab()
-        setupChipGroup()
+
+        setupChipGroup(passedArguments.latitude!!,passedArguments.longitude!!,passedArguments.name!!)
         binding.textView.text=passedArguments.snippet
 
         Glide.with(this).load(requireArguments().getString("link")).into(binding.mainImage).waitForLayout()
-        binding.toolbar.setNavigationOnClickListener(){
+        binding.toolbar.setNavigationOnClickListener {
             findNavController().navigate(R.id.action_detailsFragment_to_mainFragment)
         }
 
     }
 
     private fun unpackBundle(): DetailArguments {
-        var name=requireArguments().getString("name");
-        var snippet=requireArguments().getString("snippet");
-        var imageUrl=requireArguments().getString("imageUrl");
-        var score=requireArguments().getDouble("score");
-        var latitude=requireArguments().getDouble("latitude");
-        var longitude=requireArguments().getDouble("longitude");
+        val name=requireArguments().getString("name")
+        val snippet=requireArguments().getString("snippet")
+        val imageUrl=requireArguments().getString("link")
+        val score=requireArguments().getDouble("score")
+        val latitude=requireArguments().getDouble("latitude")
+        val longitude=requireArguments().getDouble("longitude")
         return DetailArguments(name,snippet,imageUrl,score,latitude,longitude)
     }
 
-    private fun setupChipGroup(){
-        binding.chipGroup.setOnCheckedChangeListener { chipGroup, position ->
+    private fun setupChipGroup(lat:Double,lng:Double,name:String){
+        binding.chipGroup.setOnCheckedChangeListener { chipGroup, _ ->
             for (i in 0 until chipGroup.childCount){
                 val chip = chipGroup.getChildAt(i)
                 chip.isClickable = chip.id != chipGroup.checkedChipId
-                chip.setOnClickListener(){
+                chip.setOnClickListener {
                     binding.textView.text=i.toString()
-                    val uri: String =
-                        java.lang.String.format(Locale.ENGLISH, "geo:%f,%f",requireArguments().getDouble("latitude"),requireArguments().getDouble("longitude"))
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                    val uriString = "http://maps.google.com/maps?q=$lat,$lng($name)&z=15"
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uriString))
                     requireContext().startActivity(intent)
                 }
             }
@@ -91,12 +92,14 @@ class DetailsFragment :Fragment(){
         binding.toolbar.title=title
         binding.collapsingToolbar.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
         binding.collapsingToolbar.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar)
+
     }
+
 
     private fun setupRating(score:Double?){
         binding.rBar.rating= score!!.toFloat()
-        binding.textView2.text='('+binding.rBar.rating.toString()+')'
-
+        val ratingText="(${score.toFloat()}"+")"
+        binding.textView2.text=ratingText
     }
 
     private fun setupActionBar(){

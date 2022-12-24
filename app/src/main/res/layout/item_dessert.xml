@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="25dp"
             android:layout_toEndOf="@id/imageCardView"
             android:fontFamily="@font/alata"
             android:text="asdf"
@@ -64,11 +64,12 @@
             android:id="@+id/restaurantRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+
             android:layout_toEndOf="@id/imageCardView"
-
             android:drawablePadding="2dp"
+            android:drawableTint="#C1AF15"
             android:fontFamily="@font/alata"
-
             android:textSize="16sp"
             app:drawableStartCompat="@drawable/ic_outline_star_24"
             app:layout_constraintStart_toStartOf="@+id/restaurantName"
@@ -79,6 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:drawableTint="#B12300"
             android:fontFamily="@font/alata"
             android:text="TextView"
             android:textSize="16sp"

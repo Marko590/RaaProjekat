@@ -1,25 +1,28 @@
 package com.marko590.raaprojekat.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.marko590.raaprojekat.adapter.ArticleAdapter
-import com.marko590.raaprojekat.adapter.SwipeActionLeft
-import com.marko590.raaprojekat.adapter.SwipeActionRight
+import com.marko590.raaprojekat.R
+import com.marko590.raaprojekat.adapter.FavoritesAdapter
 import com.marko590.raaprojekat.databinding.FragmentFavoritesBinding
+import com.marko590.raaprojekat.model.models.Results
+import com.marko590.raaprojekat.viewmodel.FavoritesViewModel
 
 class FavoritesFragment :Fragment(){
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
-    private var content:ArrayList<String> =arrayListOf("Marc","Donald","Bruh","Jessy","Amber","Walter")
+    private val viewModel: FavoritesViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
+    var dataset:ArrayList<Results> = arrayListOf()
     override fun onCreateView(
     inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,22 +35,23 @@ class FavoritesFragment :Fragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
-
-
-        var adapter=ArticleAdapter(content)
-        var itemTouchHelperLeft= ItemTouchHelper(SwipeActionLeft(adapter))
-        var itemTouchHelperRight= ItemTouchHelper(SwipeActionRight(adapter))
-        binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.adapter=adapter
-        binding.recyclerView.layoutManager=LinearLayoutManager(requireContext()!!)
-        itemTouchHelperLeft.attachToRecyclerView(binding.recyclerView)
-        itemTouchHelperRight.attachToRecyclerView(binding.recyclerView)
-
-
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val cuisine=sharedPref!!.getString(getString(R.string.preferredCuisineKey), "")
+        viewModel.getUpdatedFavorites("Paris", cuisine!!)
+        setupRecycleView()
     }
 
-
+    private fun setupRecycleView(){
+        var adapter = FavoritesAdapter(dataset)
+        viewModel.uiTextLiveData.observe(viewLifecycleOwner) { updatedActivity ->
+            adapter.updateUserList(updatedActivity.results)
+        }
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext()!!)
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

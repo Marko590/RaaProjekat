@@ -6,17 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.marko590.raaprojekat.R
-import com.marko590.raaprojekat.adapter.ArticleAdapter
+import com.marko590.raaprojekat.adapter.FavoritesAdapter
 import com.marko590.raaprojekat.adapter.RestaurantsAdapter
-import com.marko590.raaprojekat.adapter.SwipeActionLeft
-import com.marko590.raaprojekat.adapter.SwipeActionRight
 import com.marko590.raaprojekat.databinding.FragmentHomeBinding
 import com.marko590.raaprojekat.model.models.Results
-import com.marko590.raaprojekat.viewmodel.BoredViewModel
 import com.marko590.raaprojekat.viewmodel.RestaurantViewModel
 
 

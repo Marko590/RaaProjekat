@@ -17,9 +17,9 @@ import com.marko590.raaprojekat.model.models.Results
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-class RestaurantsAdapter(var dataset:ArrayList<Results>):
+class FavoritesAdapter(var dataset:ArrayList<Results>):
 
-    RecyclerView.Adapter<RestaurantsAdapter.ViewHolder>() {
+    RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
     private var bundle: Bundle =Bundle()
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
@@ -37,7 +37,7 @@ class RestaurantsAdapter(var dataset:ArrayList<Results>):
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesAdapter.ViewHolder {
         val view=LayoutInflater.from(parent.context).inflate(R.layout.item_dessert,parent,false)
         return ViewHolder(view)
     }
@@ -55,16 +55,25 @@ class RestaurantsAdapter(var dataset:ArrayList<Results>):
         holder.location.text=dataset[position].locationId
         holder.restaurantName.text=dataset[position].name
         holder.restaurantRating.text=roundoff.toString()
+        if(dataset[position].images.size!=0)
         Glide.with(holder.imageView.context)
-            .load(dataset[position].images[0].sizes!!.original!!.url)
+            .load(dataset[position].images[0].sizes?.original?.url)
             .skipMemoryCache(true)//for caching the image url in case phone is offline
             .into(holder.imageView)
-
+        else{
+            holder.imageView.visibility=View.GONE
+        }
         var navController: NavController? = null
         holder.card.setOnClickListener {
             bundle.putString("name",dataset[position].name)
             bundle.putString("snippet",dataset[position].snippet)
-            bundle.putString("link", dataset[position].images[0].sizes!!.original!!.url)
+            if(dataset[position].images.size!=0){
+                bundle.putString("link", dataset[position].images[0].sizes!!.original!!.url)
+            }
+
+            else{
+                bundle.putString("link", "")
+            }
             bundle.putDouble("score", dataset[position].score!!)
             bundle.putDouble("latitude", dataset[position].coordinates!!.latitude!!)
             bundle.putDouble("longitude",  dataset[position].coordinates!!.longitude!!)

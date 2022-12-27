@@ -9,6 +9,7 @@ import com.marko590.raaprojekat.model.GeocodingRetrofitClient
 import kotlinx.coroutines.launch
 
 
+@Suppress("UNNECESSARY_NOT_NULL_ASSERTION")
 class DetailsViewModel: ViewModel() {
 
 

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.marko590.raaprojekat.model.repository
 
 import androidx.lifecycle.LiveData

@@ -17,6 +17,8 @@
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/nav_graph"
+            app:launchSingleTop="true"
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
@@ -37,6 +39,9 @@
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"
             android:id="@+id/action_mainFragment_to_loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"
             app:destination="@id/loginFragment" />
         <action
 

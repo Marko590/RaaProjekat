@@ -32,9 +32,9 @@ class HomeFragment :Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.button2.setOnClickListener {
+
             viewModel.getUpdatedText()
-        }
+
         setupRecycleView()
     }
 

@@ -17,7 +17,7 @@
     <string name="emailError">Wrong E-Mail</string>
     <string name="passwordError">Wrong password</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="summaryDetails">Summary</string>
     <string name="menuDetails">Menu</string>
     <string name="errorTextPassword">Passwords don\'t match</string>
@@ -25,16 +25,16 @@
     <string name="errorTextNames">Name fields are empty</string>
     <string name="errorCombination">Invalid E-Mail/Password combination,try again.</string>
     <string name="choose_cuisine">Choose cuisine</string>
-    <string name="firstNameKey">firstNameField</string>
-    <string name="lastNameKey">lastNameField</string>
-    <string name="preferredCuisineKey">cuisineField</string>
+    <string name="firstNameKey" translatable="false">firstNameField</string>
+    <string name="lastNameKey" translatable="false">lastNameField</string>
+    <string name="preferredCuisineKey" translatable="false">cuisineField</string>
     <string name="errorTextCuisine">Please choose a preferred cuisine</string>
     <string name="cuisineButtonText">Favorite cuisine</string>
     <string name="edit_info">Edit info</string>
-    <string name="id">id</string>
+    <string name="id" translatable="false">id</string>
     <string name="commit_changes">Commit changes</string>
-    <string name="passwordKey">password</string>
-    <string name="go_to_maps">Go to maps</string>
+    <string name="passwordKey" translatable="false">password</string>
+    <string name="go_to_maps">Maps</string>
     <string name="image_of_a_restaurant">Image of a restaurant.</string>
     <string name="websiteText">Website</string>
     <string name="contactText">Contact</string>
@@ -48,5 +48,6 @@
     <string name="blankPassword">Password is blank</string>
     <string name="existingUser">User already in database</string>
     <string name="unmatchingPasswords">Passwords don\'t match.</string>
+    <string name="location" translatable="false">Location</string>
 
 </resources>

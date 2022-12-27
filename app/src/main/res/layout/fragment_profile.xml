@@ -8,14 +8,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logoutButton"
-        android:layout_width="300dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="130dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
         android:text="@string/logoutButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/commitButton"
+        app:layout_constraintStart_toStartOf="@+id/textFieldCuisine"
+        app:layout_constraintTop_toBottomOf="@+id/textFieldCuisine"
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent" />
 
     <com.google.android.material.button.MaterialButton
@@ -30,9 +29,10 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/commitButton"
-        android:layout_width="150dp"
+        android:layout_width="130dp"
         android:layout_height="55dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/commit_changes"
         app:icon="@drawable/ic_outline_check_24"
         app:layout_constraintEnd_toEndOf="@id/textFieldCuisine"
@@ -43,7 +43,7 @@
         android:id="@+id/textFieldFirstName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         android:hint="@string/firstNameButtonText"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,20 +61,20 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldLastName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:hint="@string/lastNameButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textFieldFirstName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             tools:text="Guetta" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -82,22 +82,22 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:hint="@string/emailButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textFieldLastName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="john.johnson@gmail.com"
-            android:inputType="textEmailAddress"/>
+            android:enabled="false"
+            android:inputType="textEmailAddress"
+            tools:text="john.johnson@gmail.com" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,7 +106,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:hint="@string/cuisineButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,16 +120,17 @@
             tools:text="Wine" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
     <ImageView
         android:id="@+id/appIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/ic_launcher_background"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/profileImage"
+        android:src="@drawable/ic_outline_account_circle_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/profileImage" />
+        app:tint="@color/colorPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

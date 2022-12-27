@@ -8,15 +8,15 @@
 
     <ImageView
         android:id="@+id/appIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-        android:src="@drawable/ic_launcher_background"
-        android:contentDescription="@string/appLogo" />
+        android:src="@drawable/output_onlinepngtools__2_"
+        android:contentDescription="@string/appLogo"
+        app:tint="@color/navBarColor" />
 
     <TextView
         android:id="@+id/emailError"
@@ -37,7 +37,7 @@
         android:id="@+id/textFieldEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:hint="@string/emailButtonText"
         app:startIconDrawable="@drawable/ic_outline_mail_24"
         app:layout_constraintEnd_toEndOf="parent"

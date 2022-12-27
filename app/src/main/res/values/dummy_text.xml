@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item type="string" name="Lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in lobortis turpis. Nullam dignissim pretium nunc a facilisis. Phasellus posuere nec eros eget pulvinar. Sed ornare vehicula pellentesque. Vivamus ultricies fermentum dui, non vulputate nunc rhoncus a. Cras sed pretium nulla. Pellentesque accumsan vitae nunc et venenatis. Vestibulum ac urna mollis, ultrices felis vitae, tempor risus. Phasellus id aliquam nisl.
+    <item type="string" name="Lorem" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in lobortis turpis. Nullam dignissim pretium nunc a facilisis. Phasellus posuere nec eros eget pulvinar. Sed ornare vehicula pellentesque. Vivamus ultricies fermentum dui, non vulputate nunc rhoncus a. Cras sed pretium nulla. Pellentesque accumsan vitae nunc et venenatis. Vestibulum ac urna mollis, ultrices felis vitae, tempor risus. Phasellus id aliquam nisl.
 
         Sed consequat venenatis purus, ut gravida arcu egestas sed. Pellentesque tincidunt metus ut ligula tempor, sit amet vestibulum elit varius. Integer id felis vitae lorem sodales accumsan et sit amet quam. Sed aliquet finibus tortor sagittis luctus. Cras vestibulum ut mauris eu egestas. Phasellus efficitur mi iaculis purus imperdiet porta. Phasellus condimentum ipsum condimentum lacus tincidunt, eget fringilla neque volutpat. Cras faucibus ligula nec fermentum dictum. Fusce malesuada rhoncus aliquet. Vestibulum cursus dui sed ligula congue, eu imperdiet nisi dignissim. Pellentesque ac felis ac arcu congue volutpat ut ac lacus. Donec consectetur condimentum posuere. Sed quis tortor eu mi fringilla porta. Phasellus hendrerit leo sed tempor maximus.
 

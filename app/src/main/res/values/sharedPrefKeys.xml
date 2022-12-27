@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="emailKey">emailField</string>
+    <string name="emailKey" translatable="false">emailField</string>
 </resources>

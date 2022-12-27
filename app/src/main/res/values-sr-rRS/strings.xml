@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RaaProjekat</string>
+    <string name="firstNameButtonText">Ime</string>
+    <string name="lastNameButtonText">Prezime</string>
+    <string name="emailButtonText">E-Mail</string>
+    <string name="confirmEmailText">Potvrdite E-mail</string>
+    <string name="passwordButtonText">Lozinka</string>
+    <string name="confirmPasswordText">Potvrdite lozinku</string>
+    <string name="signInButtonText">Ulogujte se</string>
+    <string name="registerQuestionText">Niste registrovani?</string>
+    <string name="registerLinkText">Napravite nalog ovde</string>
+    <string name="forgottenPassword">Zaboravili ste lozinku?</string>
+    <string name="loginQuestion">Već imate nalog?</string>
+    <string name="loginLink">Ulogujte se ovde</string>
+    <string name="registerButtonText">Registruj se</string>
+    <string name="logoutButton">Izloguj se</string>
+    <string name="emailError">Pogrešan E-Mail</string>
+    <string name="passwordError">Pogrešna lozinka</string>
+    <string name="summaryDetails">Opis</string>
+    <string name="menuDetails">Meni</string>
+    <string name="errorTextPassword">Lozinke se ne poklapaju</string>
+    <string name="errorTextEmail">Pogrešan format E-Mail-a</string>
+    <string name="errorTextNames">Polja sa imenom su prazna</string>
+    <string name="errorCombination">Pogrešna kombinacija E-Mail-a i lozinke</string>
+    <string name="choose_cuisine">Izaberite omiljenu hranu</string>
+    <string name="errorTextCuisine">Izaberite omiljenu hranu</string>
+    <string name="cuisineButtonText">Omiljena hrana</string>
+    <string name="edit_info">Promenite informacije</string>
+    <string name="commit_changes">Sačuvaj promene</string>
+    <string name="go_to_maps">Idi na mapu</string>
+    <string name="image_of_a_restaurant">Slika restorana</string>
+    <string name="websiteText">Vebsajt</string>
+    <string name="contactText">Kontakt</string>
+    <string name="addressText">Adresa</string>
+    <string name="favoriteFab">Dugme sa srcem</string>
+    <string name="appLogo">Logo aplikacije na kojem piše \"Restaurants\"</string>
+    <string name="profileImage">Profilna slika trenutnog korisnika</string>
+    <string name="favoritesTabName">Omiljeno</string>
+    <string name="profileTabName">Profil</string>
+    <string name="homeTabName">Glavna</string>
+    <string name="blankPassword">Lozinka je prazna</string>
+    <string name="existingUser">Korisnik je već registrovan</string>
+    <string name="unmatchingPasswords">Lozinke se ne poklapaju</string>
+</resources>

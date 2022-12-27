@@ -92,7 +92,10 @@ class DetailsFragment :Fragment(){
                     val chip = chipGroup.getChildAt(i)
                     chip.isClickable = chip.id != chipGroup.checkedChipId
                     chip.setOnClickListener {
+                        viewModel.addressLiveData.observe(viewLifecycleOwner){updated->
+                            binding.textView.text=updated.displayName
 
+                        }
                     }
 
                 }

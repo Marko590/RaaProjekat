@@ -140,7 +140,7 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip2"
                     style="@style/ChipCustomStyle"
-                    android:text="@string/menuDetails"
+                    android:text="@string/location"
                     app:checkedIconEnabled="false"
                     app:chipBackgroundColor="@color/bg_chip_state_list"
                     app:chipIcon="@drawable/ic_outline_menu_book_24"

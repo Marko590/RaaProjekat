@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,6 +45,16 @@ class FavoritesFragment :Fragment(){
         val adapter = FavoritesAdapter(dataset)
         viewModel.uiTextLiveData.observe(viewLifecycleOwner) { updatedActivity ->
             adapter.updateUserList(updatedActivity.results)
+            if (updatedActivity.results.isNullOrEmpty()){
+                binding.recyclerView.layoutParams.width= ConstraintLayout.LayoutParams.MATCH_PARENT
+                binding.recyclerView.layoutParams.height=900
+                binding.errorMessage.visibility=View.VISIBLE
+            }
+            else{
+                binding.recyclerView.layoutParams.width= ConstraintLayout.LayoutParams.MATCH_PARENT
+                binding.recyclerView.layoutParams.height=ConstraintLayout.LayoutParams.MATCH_PARENT
+                binding.errorMessage.visibility=View.INVISIBLE
+            }
         }
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter

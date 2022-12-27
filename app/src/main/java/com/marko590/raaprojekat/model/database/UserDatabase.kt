@@ -1,13 +1,12 @@
 package com.marko590.raaprojekat.model.database
 
 import android.content.Context
-import android.provider.ContactsContract
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.marko590.raaprojekat.model.database.entities.UserTable
 
-@Database(entities = arrayOf(UserTable::class), version = 1, exportSchema = false)
+@Database(entities = [UserTable::class], version = 1, exportSchema = false)
 abstract class UserDatabase : RoomDatabase() {
 
     abstract fun getUserDao(): UserDao
@@ -26,7 +25,7 @@ abstract class UserDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     UserDatabase::class.java,
-                    "userdatabase"
+                    "newdatabase"
                 ).build()
                 INSTANCE = instance
                 // return instance

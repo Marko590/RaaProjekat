@@ -9,16 +9,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marko590.raaprojekat.adapter.RestaurantsAdapter
 import com.marko590.raaprojekat.databinding.FragmentHomeBinding
-import com.marko590.raaprojekat.model.models.Results
+import com.marko590.raaprojekat.model.models.restaurants.Results
 import com.marko590.raaprojekat.viewmodel.RestaurantViewModel
 
 
 class HomeFragment :Fragment(){
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     private val viewModel: RestaurantViewModel by activityViewModels()
     private var dataset:ArrayList<Results> = arrayListOf()
@@ -26,7 +23,7 @@ class HomeFragment :Fragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root

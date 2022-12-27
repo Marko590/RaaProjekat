@@ -9,7 +9,7 @@ import com.marko590.raaprojekat.model.database.entities.UserTable
 import com.marko590.raaprojekat.model.repository.UserRepository
 import kotlinx.coroutines.launch
 
-class LoginViewModel (application: Application) : AndroidViewModel(application) {
+class RegisterViewModel (application: Application) : AndroidViewModel(application) {
 
     val allUsers : LiveData<List<UserTable>>
     private val repository : UserRepository
@@ -20,18 +20,13 @@ class LoginViewModel (application: Application) : AndroidViewModel(application) 
         allUsers = repository.allUsers
     }
 
-
-    fun updateUser(user:UserTable) = viewModelScope.launch {
-        repository.update(user)
-
-    }
-
-
-
     fun fetchUsers(){
         viewModelScope.launch{
-            repository.userDao.getAllByLiveData()
+            repository
         }
     }
 
+    fun addUser(user:UserTable) = viewModelScope.launch{
+        repository.insert(user)
+    }
 }

@@ -14,7 +14,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.marko590.raaprojekat.R
-import com.marko590.raaprojekat.model.models.Results
+import com.marko590.raaprojekat.model.models.restaurants.Results
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -50,6 +50,21 @@ class RestaurantsAdapter(private var dataset:ArrayList<Results>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
+        setupCard(position,holder)
+
+        var navController: NavController?
+        holder.card.setOnClickListener {
+
+            fillBundle(position)
+
+            navController = Navigation.findNavController(holder.restaurantName)
+            navController!!.navigate(R.id.action_mainFragment_to_detailsFragment,bundle)
+
+        }
+    }
+
+
+    private fun setupCard(position:Int,holder:ViewHolder){
         val df = DecimalFormat("#.##")
         df.roundingMode=RoundingMode.DOWN
         val roundoff = df.format(dataset[position].score!!)
@@ -60,29 +75,25 @@ class RestaurantsAdapter(private var dataset:ArrayList<Results>):
             .load(dataset[position].images[0].sizes!!.original!!.url)
             .skipMemoryCache(true)//for caching the image url in case phone is offline
             .into(holder.imageView)
-
-        var navController: NavController?
-        holder.card.setOnClickListener {
-            bundle.putString("name",dataset[position].name)
-            bundle.putString("snippet",dataset[position].snippet)
-            bundle.putString("link", dataset[position].images[0].sizes!!.original!!.url)
-            bundle.putDouble("score", dataset[position].score!!)
-            bundle.putDouble("latitude", dataset[position].coordinates!!.latitude!!)
-            bundle.putDouble("longitude",  dataset[position].coordinates!!.longitude!!)
-
-            navController = Navigation.findNavController(holder.restaurantName)
-            navController!!.navigate(R.id.action_mainFragment_to_detailsFragment,bundle)
-
-        }
     }
 
+
+    private fun fillBundle(position:Int){
+        bundle.putString("name",dataset[position].name)
+        bundle.putString("snippet",dataset[position].snippet)
+        bundle.putString("link", dataset[position].images[0].sizes!!.original!!.url)
+        bundle.putDouble("score", dataset[position].score!!)
+        bundle.putDouble("latitude", dataset[position].coordinates!!.latitude!!)
+        bundle.putDouble("longitude",  dataset[position].coordinates!!.longitude!!)
+        if(dataset[position].attribution.find { a -> a.sourceId == "wikipedia" } != null) {
+            bundle.putString("website",  dataset[position].attribution.find{a->a.sourceId=="wikipedia"}!!.url)
+        }
+    }
     @SuppressLint("NotifyDataSetChanged")
     fun updateUserList(datasetNew: ArrayList<Results>) {
         dataset.clear()
         dataset = datasetNew
-
         notifyDataSetChanged()
     }
-
 
 }

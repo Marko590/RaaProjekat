@@ -1,6 +1,6 @@
 package com.marko590.raaprojekat.model
 
-import com.marko590.raaprojekat.model.models.RestaurantsResponse
+import com.marko590.raaprojekat.model.models.restaurants.RestaurantsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers

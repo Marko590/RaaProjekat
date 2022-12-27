@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.marko590.raaprojekat.R
 import com.marko590.raaprojekat.adapter.FavoritesAdapter
 import com.marko590.raaprojekat.databinding.FragmentFavoritesBinding
-import com.marko590.raaprojekat.model.models.Results
+import com.marko590.raaprojekat.model.models.restaurants.Results
 import com.marko590.raaprojekat.viewmodel.FavoritesViewModel
 
 class FavoritesFragment :Fragment(){
@@ -24,7 +24,7 @@ class FavoritesFragment :Fragment(){
     inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
@@ -35,8 +35,8 @@ class FavoritesFragment :Fragment(){
 
         super.onViewCreated(view, savedInstanceState)
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        val cuisine=sharedPref!!.getString(getString(R.string.preferredCuisineKey), "")
-        viewModel.getUpdatedFavorites("Paris", cuisine!!)
+        val cuisine=sharedPref!!.getString(getString(R.string.preferredCuisineKey), "")!!
+        viewModel.getUpdatedFavorites("Paris", cuisine)
         setupRecycleView()
     }
 

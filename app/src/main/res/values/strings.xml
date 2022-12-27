@@ -30,5 +30,23 @@
     <string name="preferredCuisineKey">cuisineField</string>
     <string name="errorTextCuisine">Please choose a preferred cuisine</string>
     <string name="cuisineButtonText">Favorite cuisine</string>
+    <string name="edit_info">Edit info</string>
+    <string name="id">id</string>
+    <string name="commit_changes">Commit changes</string>
+    <string name="passwordKey">password</string>
+    <string name="go_to_maps">Go to maps</string>
+    <string name="image_of_a_restaurant">Image of a restaurant.</string>
+    <string name="websiteText">Website</string>
+    <string name="contactText">Contact</string>
+    <string name="addressText">Address</string>
+    <string name="favoriteFab">Floating button with a heart.</string>
+    <string name="appLogo">Logo of the application saying \'Restaurants\'</string>
+    <string name="profileImage">Profile picture of the current user.</string>
+    <string name="homeTabName">Home</string>
+    <string name="favoritesTabName">Favorites</string>
+    <string name="profileTabName">Profile</string>
+    <string name="blankPassword">Password is blank</string>
+    <string name="existingUser">User already in database</string>
+    <string name="unmatchingPasswords">Passwords don\'t match.</string>
 
 </resources>

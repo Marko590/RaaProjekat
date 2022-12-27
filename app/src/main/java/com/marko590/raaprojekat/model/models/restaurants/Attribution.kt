@@ -1,4 +1,4 @@
-package com.marko590.raaprojekat.model.models
+package com.marko590.raaprojekat.model.models.restaurants
 
 import com.google.gson.annotations.SerializedName
 

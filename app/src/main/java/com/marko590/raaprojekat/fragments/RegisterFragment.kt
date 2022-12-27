@@ -1,6 +1,5 @@
 package com.marko590.raaprojekat.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
@@ -12,21 +11,20 @@ import com.google.android.material.textfield.TextInputLayout
 import com.marko590.raaprojekat.R
 import com.marko590.raaprojekat.databinding.FragmentRegisterBinding
 import com.marko590.raaprojekat.model.database.entities.UserTable
-import com.marko590.raaprojekat.viewmodel.LoginViewModel
+import com.marko590.raaprojekat.viewmodel.RegisterViewModel
 
+@Suppress("DEPRECATION")
 class RegisterFragment :Fragment(){
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: LoginViewModel by activityViewModels()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val viewModel: RegisterViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         setupBars()
 
@@ -67,12 +65,12 @@ class RegisterFragment :Fragment(){
                         }
                         else{
                             if (userInDb != null) {
-                                showError("User already in database")
+                                showError(getString(R.string.existingUser))
                                 binding.textFieldEmail.startAnimation(shakeAnim)
                             } else {
                                 insertUser()
-                                setCurrentUser()
-                                findNavController().navigate(R.id.action_registerFragment_to_mainFragment)
+                                viewModel.fetchUsers()
+                                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                             }
                         }
                     }
@@ -97,16 +95,8 @@ class RegisterFragment :Fragment(){
     }
 
 
-    private fun setCurrentUser(){
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        with (sharedPref!!.edit()) {
-            putString(getString(R.string.emailKey),binding.textFieldEmail.editText!!.text.toString())
-            putString(getString(R.string.firstNameKey),binding.textFieldName1.editText!!.text.toString())
-            putString(getString(R.string.lastNameKey),binding.textFieldName2.editText!!.text.toString())
-            putString(getString(R.string.preferredCuisineKey), binding.cuisinePicker.editText!!.text.toString())
-            apply()
-        }
-    }
+
+
 
     private fun setupBars(){
         val window: Window = requireActivity().window
@@ -126,7 +116,7 @@ class RegisterFragment :Fragment(){
         val password=binding.textFieldPassword.editText!!.text.toString()
         val preferredCuisine=binding.cuisinePicker.editText!!.text.toString()
 
-        viewModel.addUser(UserTable(firstName,lastName, emailName,password, preferredCuisine))
+        viewModel.addUser(UserTable(firstName,lastName, emailName,password, preferredCuisine,0))
     }
 
     private fun checkEmails(email:TextInputLayout, confirmEmail:TextInputLayout):Boolean{
@@ -154,11 +144,11 @@ class RegisterFragment :Fragment(){
             if(password.editText!!.text.toString().isNotBlank()) {
                 true
             } else{
-                binding.errorText.text="Password is blank"
+                binding.errorText.text=getString(R.string.blankPassword)
                 false
             }
         } else{
-            binding.errorText.text="Passwords don't match."
+            binding.errorText.text=getString(R.string.unmatchingPasswords)
             false
         }
     }

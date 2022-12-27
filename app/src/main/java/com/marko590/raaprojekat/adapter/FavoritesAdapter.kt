@@ -14,7 +14,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.marko590.raaprojekat.R
-import com.marko590.raaprojekat.model.models.Results
+import com.marko590.raaprojekat.model.models.restaurants.Results
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -39,7 +39,7 @@ class FavoritesAdapter(private var dataset:ArrayList<Results>):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_dessert,parent,false)
+        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_restaurant,parent,false)
         return ViewHolder(view)
     }
 

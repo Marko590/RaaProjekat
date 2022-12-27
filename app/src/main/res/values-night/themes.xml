@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.RaaProjekat" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
@@ -35,15 +35,7 @@
 <item name="android:maxLines">2</item>
 <item name="android:textStyle">normal</item>
 </style>
-    <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">#737983</item>
-        <item name="colorControlActivated">@color/colorPrimary</item>
-    </style>
 
-    <style name="ChipCustomStyle" parent="Widget.MaterialComponents.Chip.Filter">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">60dp</item>
-        <item name="android:clickable">true</item>
-        <item name="android:textColor">@color/text_chip_state_list</item>
-    </style>
+
+
 </resources>

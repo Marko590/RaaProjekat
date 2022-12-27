@@ -16,18 +16,16 @@ class LoginFragment :Fragment(){
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     private val viewModel: LoginViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        viewModel.fetchUsers()
         return binding.root
 
     }
@@ -37,11 +35,13 @@ class LoginFragment :Fragment(){
 
 
         binding.button.setOnClickListener {
+
+
             viewModel.allUsers.observe(viewLifecycleOwner) { updated ->
                 val userInDb=updated.find { it.email == binding.textFieldEmail.editText!!.text.toString() }
                 if (userInDb!= null) {
                     if(userInDb.password==binding.textFieldPassword.editText!!.text.toString()) {
-                        setCurrentUser(userInDb.email,userInDb.firstname,userInDb.lastname,userInDb.preferredCuisine)
+                        setCurrentUser(userInDb.id,userInDb.email,userInDb.firstname,userInDb.lastname,userInDb.preferredCuisine,userInDb.password)
                         findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
                     }
                     else {
@@ -64,13 +64,15 @@ class LoginFragment :Fragment(){
 
     }
 
-    private fun setCurrentUser(email:String,firstName:String,lastName:String,cuisine:String){
+    private fun setCurrentUser(id:Int,email:String,firstName:String,lastName:String,cuisine:String,password:String){
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
         with (sharedPref!!.edit()) {
+            putInt(getString(R.string.id), id)
             putString(getString(R.string.emailKey), email)
             putString(getString(R.string.firstNameKey), firstName)
             putString(getString(R.string.lastNameKey), lastName)
             putString(getString(R.string.preferredCuisineKey), cuisine)
+            putString(getString(R.string.passwordKey),password)
             apply()
         }
     }

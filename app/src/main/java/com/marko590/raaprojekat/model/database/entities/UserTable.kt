@@ -15,9 +15,6 @@ class UserTable (@ColumnInfo(name = "firstname")val firstname :String,
             @ColumnInfo(name = "lastname")val lastname :String,
             @ColumnInfo(name = "email")val email :String,
                  @ColumnInfo(name = "password")val password :String,
-                 @ColumnInfo(name = "preferredCuisine")val preferredCuisine :String) {
-    // on below line we are specifying our key and
-    // then auto generate as true and we are
-    // specifying its initial value as 0
-    @PrimaryKey(autoGenerate = true) var id = 0
-}
+                 @ColumnInfo(name = "preferredCuisine")val preferredCuisine :String,
+                 @PrimaryKey(autoGenerate = true) var id :Int)
+

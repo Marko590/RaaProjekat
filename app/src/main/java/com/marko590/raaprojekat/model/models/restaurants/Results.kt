@@ -1,7 +1,5 @@
-package com.marko590.raaprojekat.model.models
+package com.marko590.raaprojekat.model.models.restaurants
 
-import android.content.pm.Attribution
-import android.provider.MediaStore
 import com.google.gson.annotations.SerializedName
 
 

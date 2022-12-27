@@ -3,17 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/low_poly_grid_haikei__1_">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logoutButton"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="25dp"
         android:text="@string/logoutButton"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
 
+        app:layout_constraintTop_toBottomOf="@+id/commitButton"
+        app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/editButton"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:text="@string/edit_info"
+        app:icon="@drawable/ic_outline_edit_24"
+        app:layout_constraintBottom_toTopOf="@id/textFieldFirstName"
+        app:layout_constraintEnd_toEndOf="@id/textFieldFirstName"
+        app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/commitButton"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/commit_changes"
+        app:icon="@drawable/ic_outline_check_24"
+        app:layout_constraintEnd_toEndOf="@id/textFieldCuisine"
         app:layout_constraintTop_toBottomOf="@+id/textFieldCuisine"
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent" />
 
@@ -30,7 +52,7 @@
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent">
 
         <com.google.android.material.textfield.TextInputEditText
-
+            android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="David"/>
@@ -50,7 +72,7 @@
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent">
 
         <com.google.android.material.textfield.TextInputEditText
-
+            android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Guetta" />
@@ -71,6 +93,7 @@
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="john.johnson@gmail.com"
@@ -80,6 +103,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldCuisine"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -87,12 +111,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textFieldEmail"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:shapeAppearance="@style/ShapeAppearance.App.SmallComponent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             tools:text="Wine" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -106,6 +130,6 @@
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toTopOf="parent"
-        />
+        android:contentDescription="@string/profileImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

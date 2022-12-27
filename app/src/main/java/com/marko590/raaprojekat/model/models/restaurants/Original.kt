@@ -1,9 +1,9 @@
-package com.marko590.raaprojekat.model.models
+package com.marko590.raaprojekat.model.models.restaurants
 
 import com.google.gson.annotations.SerializedName
 
 
-data class Medium (
+data class Original (
 
     @SerializedName("url"    ) var url    : String? = null,
     @SerializedName("bytes"  ) var bytes  : Int?    = null,

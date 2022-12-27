@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marko590.raaprojekat.model.*
-import com.marko590.raaprojekat.model.models.RestaurantsResponse
+import com.marko590.raaprojekat.model.models.restaurants.RestaurantsResponse
 import kotlinx.coroutines.launch
 
 
@@ -20,7 +20,7 @@ class RestaurantViewModel: ViewModel() {
         }
     }
 
-    suspend fun fetchActivity(): RestaurantsResponse {
+    private suspend fun fetchActivity(): RestaurantsResponse {
 
         val instance= RestaurantRetrofitClient.getInstance()
         val api=instance.create(RestaurantApi::class.java)

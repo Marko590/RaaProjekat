@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ChipCustomStyle" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/text_chip_state_list</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DetailsInfo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:drawablePadding">20dp</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#737983</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+
+    </style>
+
+</resources>

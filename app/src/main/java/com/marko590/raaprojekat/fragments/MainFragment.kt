@@ -41,7 +41,6 @@ class MainFragment: Fragment() {
             true
         }
     }
-
     private fun setupStatusBar(){
         val window: Window = requireActivity().window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
